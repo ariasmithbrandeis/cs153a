@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import { Text, View, StyleSheet, Image, Button, FlatList, TextInput } from 'react-native'; 
 
-const SyncReddit = () => {
+const SyncArt = () => {
     const [data,setData] = useState([]);
     const [sub,setSub] = useState('');
 
@@ -58,7 +58,13 @@ const SyncReddit = () => {
                         
                     </View>
                 )}
-                />   
+                /> 
+                <View>
+                <Button title = "Google Drive Import" 
+                onPress={() => {getReddit()}}>   
+
+                </Button>
+                </View>  
         </View>
 
        
@@ -129,4 +135,4 @@ const styles = StyleSheet.create({
   
   });
 
-export default SyncReddit;
+export default SyncArt;
