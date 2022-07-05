@@ -1,11 +1,13 @@
 import React, {useState, useEffect} from 'react';
 import { Text, View, StyleSheet, Image, Button, FlatList, TextInput } from 'react-native'; 
-import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import NavigationArt from '../App';
+
+import SyncArt from './SyncArt';
 
 const Stack = createNativeStackNavigator ();
 
-const HomeStack = () => {
+const HomeScreen = ({navigation}) => {
     
 
     return (
@@ -20,31 +22,9 @@ const HomeStack = () => {
             </View>
             <View style={styles.inputContainer}>
 
-        <NavigationContainer>
-            <Stack.Navigator>
-    
-                <Stack.Screen
-                    name = "Get Art"
-                    component={SyncArtScreen}
-                />
-                <Stack.Screen
-                    name = "Inspo Board"
-                    component={InspoScreen}
-                />
-                <Stack.Screen
-                    name = "Resume"
-                    component={ResumeScreen}
-                />
-                <Stack.Screen
-                    name = "Profile"
-                    component={ProfileScreen}
-                />
-
-            </Stack.Navigator>
-        </NavigationContainer>
             <Button title = "Get Art" 
                 onPress={() => {() => 
-                navigation.navigate('GetArt')}}>   
+                navigation.navigate('Art Page')}}>   
         
             </Button> 
                 <Button title = "Inspo Board" 
@@ -71,7 +51,7 @@ const SyncArtScreen = ({navigation}) => {
     return (
         <Button title = "Get Art"
         onPress={() => {() => 
-        navigation.navigate('Get Art')}}/>   
+        navigation.navigate(SyncArt)}}/>   
         
 
       );
@@ -174,4 +154,4 @@ const styles = StyleSheet.create({
   
   });
 
-export default HomeStack;
+export default HomeScreen;

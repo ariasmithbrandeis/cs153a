@@ -1,11 +1,12 @@
 import React from 'react';
-import { Text, View, StyleSheet, Image, Button } from 'react-native'; 
+import { Text, View, StyleSheet, Image, Button, ScrollView } from 'react-native'; 
 
 const DevelopersPage = () => {
 
   return (
 
     <View style={styles.container}>
+      <ScrollView contentContainerStyle = {{flexGrow:1}}>
       <View>   
         <Text style={styles.label}>
           Developer's Page
@@ -22,8 +23,6 @@ const DevelopersPage = () => {
           Computer Science/Studio Art - Senior
 
         </Text>
-      </View>
-      <View>
       <Image source={{uri:'https://cdn.prestosports.com/action/cdn/img/mw=600/mh=800/cr=n/d=0gsu4/yq9mydbfl7exh153.jpg'}} style = {{height: 500, width: 300, margin: 5 }}/>
       </View>
       <View style={styles.info}>
@@ -35,6 +34,7 @@ const DevelopersPage = () => {
 
         This application is a portfoio and resume maker that is designed specifically for artists' creative and organizational needs.  The artist will be able to pull images of their artwork from traditional sources such as  local device and drive, as well as social media accounts and artists online repositories. I hope to add a visibility component and resume generator.    </Text>
       </View>
+      </ScrollView>
     </View>
 
   );
