@@ -18,6 +18,16 @@ const InspoPage = () => {
           }
         };
 
+        const clearAll = async () => {
+          try {
+            console.log('in clearData')
+            await AsyncStorage.clear()
+          } catch(e) {
+            console.log("error in clearData ")
+            console.dir(e)
+            // clear error
+          }
+    }
     
     return (
         <View style = {styles.container}>
@@ -43,6 +53,14 @@ const InspoPage = () => {
                 onPress={() => {getReddit()}}>   
 
                 </Button>
+                <Button
+                title={"Clear"}
+                color="red"
+                onPress = {() => {
+                  clearAll()
+                  getReddit([])
+                }}
+                />
             </View>
             <SafeAreaView>
             <FlatList

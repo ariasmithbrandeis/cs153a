@@ -5,7 +5,6 @@ import NavigationArt from '../App';
 
 import SyncArt from './SyncArt';
 
-const Stack = createNativeStackNavigator ();
 
 const HomeScreen = ({navigation}) => {
     
@@ -46,50 +45,7 @@ const HomeScreen = ({navigation}) => {
         
     );
 }
-const SyncArtScreen = ({navigation}) => {
 
-    return (
-        <Button title = "Get Art"
-        onPress={() => {() => 
-        navigation.navigate(SyncArt)}}/>   
-        
-
-      );
-}
-const InspoScreen = ({navigation}) => {
-
-           
-    return (         
-    <Button title = "Inspo Board" 
-    onPress={() => {() => 
-    navigation.navigate('Inspo Board')}}>   
-        
-    </Button>
-    )
-}
-const ResumeScreen = ({navigation}) => {
-
-                  
-    return (  
-    <Button title = "Resume" 
-    onPress={() => {() => 
-    navigation.navigate('Resume')}}>   
-        
-    </Button>
-    )
-
-}
-const ProfileScreen = ({navigation}) => {
-
-               
-    return (     
-    <Button title = "Profile" 
-    onPress={() => {() => 
-    navigation.navigate('Profile')}}>   
-        
-    </Button>
-    )
-}
 
 const styles = StyleSheet.create({
 
