@@ -3,13 +3,16 @@ import { Text, View, StyleSheet, Image, Button, FlatList, TextInput, SafeAreaVie
 
 const InspoPage = () => {
     const [data,setData] = useState([]);
+    const [loading,setLoading] = useState(true);
     const [sub,setSub] = useState('');
-
+    const [url,setUrl] = useState("https://www.reddit.com/r/"+sub+".json");
     const getReddit = async() => {
+
         try{
-            const url = "https://www.reddit.com/r/"+sub+'.json'
+            const uri = "https://www.reddit.com/r/"+sub+".json";
             const response = await fetch(url);
             const json = await response.json();
+            console.info("Url is : "+url);
             setData(json.data.children); 
           } catch (error) {
             console.error(error);
@@ -18,17 +21,8 @@ const InspoPage = () => {
           }
         };
 
-        const clearAll = async () => {
-          try {
-            console.log('in clearData')
-            await AsyncStorage.clear()
-          } catch(e) {
-            console.log("error in clearData ")
-            console.dir(e)
-            // clear error
-          }
-    }
-    
+    useEffect(()=> {
+      setUrl(("https://www.reddit.com/r/"+sub+".json"))});
     return (
         <View style = {styles.container}>
           <ScrollView contentContainerStyle = {{flexGrow:1}}>
@@ -47,24 +41,15 @@ const InspoPage = () => {
                 <TextInput style = {{borderWidth: 1}} 
                 placeholder= '/rsubreddit'
                 onChangeText={(text) => {setSub(text)}}>
-                    
                 </TextInput>
                 <Button title = "reddit import" 
                 onPress={() => {getReddit()}}>   
-
                 </Button>
-                <Button
-                title={"Clear"}
-                color="red"
-                onPress = {() => {
-                  clearAll()
-                  getReddit([])
-                }}
-                />
             </View>
-            <SafeAreaView>
+            <View>
             <FlatList
                 data = {data}
+                keyExtractor={({ id }, index) => index}
                 renderItem = {({ item }) => (
                     <View style={{flexDirection:'row',
                                     padding:15,
@@ -75,66 +60,48 @@ const InspoPage = () => {
                         <Text>{item.data.title}</Text>
                         <Image style = {{width: item.data.thumbnail_width, height: item.data.thumbnail_height}}
                                 source = {{uri: item.data.thumbnail}}/>
-                        
                     </View>
                 )}
                 /> 
-                </SafeAreaView> 
+                </View> 
           </ScrollView>
         </View>
-
-       
-        
     );
 }
-
 const styles = StyleSheet.create({
-
-
     container: {
       flexDirection: 'column',
       flex:1,
       alignItems: 'center',
-  
     },
-  
+
     labelContainer: {
       alignItems: 'center',
       justifyContent: 'top',
-  
     },
-  
     inputContainer: {
         alignItems: 'center',
         justifyContent: 'top',
         flexDirection: 'column',
-    
       },
     title:{
-  
       fontSize:36,
       color:'#eb34e5',
       fontWeight:600,
       fontFamily: "Arial",
     },
-  
     subTitle:{
-  
       fontSize:20,
       color:'#4287f5',
       fontWeight:400,
       fontFamily: "Arial",
     },
-  
     label: {
       textAlign: "center",
       marginBottom: 10,
       fontSize: 20,
-  
-  
     },
-  
-  
+
     paragraph: {
       margin: 24,
       marginTop: 0,
@@ -142,13 +109,16 @@ const styles = StyleSheet.create({
       fontWeight: 'bold',
       textAlign: 'left',
     },
-  
+
     info: {
       alignItems: 'center',
       justifyContent: 'top',
       padding: 50,
     }
-  
   });
 
 export default InspoPage;
+
+	
+	
+	
