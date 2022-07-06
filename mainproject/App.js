@@ -4,7 +4,7 @@ import { Text, View, StyleSheet, Image, Button } from 'react-native';
 //import SyncArt from './components/SyncArt';
 //import AppAsyncContext from './components/AppAsyncContext'; 
 //import HomePage from './components/HomePage';
-import NavigationArt from './components/NavigationArt';
+import portfolioApp from './components/AppAsyncContext';
 
 
 // const App = () => {
@@ -16,4 +16,4 @@ import NavigationArt from './components/NavigationArt';
 //   );
 // }
 
-export default NavigationArt;
+export default portfolioApp;

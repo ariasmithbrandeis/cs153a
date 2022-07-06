@@ -1,15 +1,15 @@
 import React from "react";
-import ValueProvider from "./ValueContext";
-import HomeStack from "./HomePage";
-//import SyncReddit from "./HomePage";
+
+import ValueProvider from './ValueStorageContext';
+import NavigationArt from './NavigationArt';
 
 const App = () => {
-    const data = {username: "anon",firstName: "anon",emailAddress: "anon@brandeis.edu"};
+    let data = {fName: "talented",lName: "artist" , email: "artstudent@brandeis.edu"};
 
     return (
-        <ValueProvider value = {data}>
-            <HomeStack/>
-        </ValueProvider>
+        <ValueProvider value={data} tag="portfolioApp">
+            <NavigationArt />
+        </ValueProvider>    
     )
 }
 

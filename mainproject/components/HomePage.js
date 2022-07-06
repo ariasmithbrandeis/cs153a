@@ -1,13 +1,27 @@
 import React, {useState, useEffect} from 'react';
-import { Text, View, StyleSheet, Image, Button, FlatList, TextInput } from 'react-native'; 
+import { Text, View, StyleSheet, Image, Button, TouchableOpacity, TextInput } from 'react-native'; 
+import {useValue} from './ValueStorageContext';
+import {sendFeedback} from './Feedback';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import NavigationArt from '../App';
-
-import SyncArt from './SyncArt';
 
 
-const HomeScreen = ({navigation}) => {
-    
+const HomeScreen = () => {
+  const {currentValue,setCurrentValue} = useValue();
+  const [fName,setfName] = useState(currentValue.fName);
+  const [lName,setlName] = useState(currentValue.lName);
+  const [email,setEmail] = useState(currentValue.email);
+  const [feedback,setFeedback] = useState("");
+
+  const createFeedback = () => {
+    setFeedback("{fName: " + fName + ", lName: " + lName + " ,email: " + email);
+  }
+
+  useEffect(()=> {
+    setfName(currentValue.fName);
+    setlName(currentValue.lName);
+    setEmail(currentValue.email);
+  },
+  [currentValue]);
 
     return (
         <View style = {styles.container}>
@@ -16,30 +30,85 @@ const HomeScreen = ({navigation}) => {
                     Artist Portfolio Helper
                 </Text>
                 <Text style={styles.subTitle}>
-                    Getting Started
+                    Welcome Back, {currentValue.fName}!
+                </Text>
+                <Text style={styles.paragraph}>
+                    ~~~~~~~~~~~~~~~~
+                </Text>
+                <Text style={styles.paragraph}>
+                    I you are not {currentValue.fName}, simply
+                    fill out the form below to
+                </Text>
+
+                <Text style={styles.subTitle}>
+                    Get Started!
                 </Text>
             </View>
             <View style={styles.inputContainer}>
+              <View style={styles.inputElements}>
+              <Text style={{fontWeight:'800'}}>First Name: </Text>
+                <TextInput
+                    style={{backgroundColor:"#FFB6C1"}}
+                    onChangeText = {(text)=>setfName(text)} 
+                    value={fName}
+                />
+              </View>
+              <View style={styles.inputElements}>
+                <Text style={{fontWeight:'800'}}>Last Name: </Text>
+                <TextInput
+                    style={{backgroundColor:'#4287f5'}}
+                    onChangeText = {(text)=>setlName(text)} 
+                    value={lName}
+                />
+              </View>
+              <View style={styles.inputElements}>
+                <Text style={{fontWeight:'800'}}>EMAIL: </Text>
+                <TextInput
+                    style={{backgroundColor:'lightgreen'}}
+                    onChangeText = {(text)=>setEmail(text)} 
+                    value={email}
+                />
+              </View>
 
-            <Button title = "Get Art" 
-                onPress={() => {() => 
-                navigation.navigate('Art Page')}}>   
-        
-            </Button> 
-                <Button title = "Inspo Board" 
-                onPress={() => {}}>   
-
+              <Button
+                    title="Get Started"
+                    style={{fontSize:20, padding:10, marginTop: 5}}
+                    onPress = {() => {
+                        console.log('saving...');
+                        setCurrentValue({fName,lName,email})
+                        // sendFeedback(createFeedback());
+                        setFeedback("")}}
+                    >
                 </Button>
-                <Button title = "Resume" 
-                onPress={() => {}}>   
+                <View style={styles.labelContainer}>
+                  <Text style = {styles.subTitle}>
+                      Do you like our app?
+                  </Text>  
+                  <Text style = {styles.subTitle}>
+                      Tell us so! We would love to hear from you!
+                  </Text>  
 
-                </Button>
-                <Button title = "Profile Page" 
-                onPress={() => {}}>   
+                  <View style={{flexDirection:'row',justifyContent:'center'}}>
+                    <TouchableOpacity
+                        title="send feedback"
+                        style={{fontSize:10}}
+                        onPress = {() => {
+                            console.log('sending feedback....');
+                            sendFeedback(feedback);
+                            setFeedback("")}}
+                        >
+                        <Text>send feedback</Text>
+                    </TouchableOpacity>
+                </View>
+                  <TextInput multiline
+                    numberOfLines={3}
+                    placeholder="feedback"
+                    style={{backgroundColor:'yellow'}}
+                    onChangeText = {(text) => setFeedback(text)}
+                    value={feedback} />
+                  </View>
 
-                </Button>
             </View>
- 
         </View>
 
         
@@ -62,13 +131,20 @@ const styles = StyleSheet.create({
       justifyContent: 'top',
   
     },
-  
+
     inputContainer: {
-        alignItems: 'center',
-        justifyContent: 'top',
-        flexDirection: 'column',
-    
-      },
+      alignItems: 'center',
+      justifyContent: 'top',
+      flexDirection: 'column',
+      justifyContent:'space-evenly',
+      flex:1,
+    },
+
+    inputElements: {
+      alignItems: 'left',
+      flexDirection: 'row',
+    },
+
     title:{
   
       fontSize:36,
