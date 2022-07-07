@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
-import { Text, View, StyleSheet, Image, Button, FlatList, TextInput, SafeAreaView, ScrollView, TouchableOpacity } from 'react-native'; 
-
+import { Text, View, StyleSheet, Image, Button, FlatList, TextInput,  ScrollView } from 'react-native'; 
+import { Dimensions, SafeAreaView, TouchableOpacity } from 'react-native'; 
 import * as ImagePicker from 'expo-image-picker';
 
 const SyncArt = () => {

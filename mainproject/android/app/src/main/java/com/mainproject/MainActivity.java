@@ -1,4 +1,4 @@
-package com.firstproject;
+package com.mainproject;
 
 import android.os.Build;
 import android.os.Bundle;
