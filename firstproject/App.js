@@ -5,7 +5,9 @@ import React from 'react';
 //import Roster from './components/roster';
 //import CounterDemo from './components/CounterDemo';
 //import Exam3c from './components/exam3c'; 
-import Demo from './components/AsyncContextDemo';
+//import Demo from './components/AsyncContextDemo';
+import Demo from './exam7/AsyncContextDemo';
+
 
 
 export default Demo;
